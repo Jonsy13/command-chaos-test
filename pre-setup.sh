@@ -6,12 +6,12 @@
 declare -a pkgs=("iproute-tc" "stress-ng")
 
 ## Verifying & loading sch_netem package
-if [[ ! -z lsmod | grep "sch_netem" ]]
+if [[ ! -z $(lsmod | grep "sch_netem") ]]
 then
     echo -e "\n[Info]: sch_netem module is already loaded\n"
 else
     echo -e "\n[Info]: sch_netem module not loaded, checking if kernel-modules-extra package is installed...\n"
-    if [[ ! -z rpm -q kernel-modules-extra-$(uname -r) ]]
+    if [[ ! -z $(rpm -q kernel-modules-extra-$(uname -r)) ]]
     then
         echo -e "\n[Info]: kernel-modules-extra package is already installed\n"
     else
@@ -25,7 +25,7 @@ fi
 ## verifying & installing all required packages
 for pkg in "${pkgs[@]}"
 do
-    if [[ ! -z rpm -q $pkg ]]
+    if [[ ! -z $(rpm -q $pkg) ]]
     then
         echo -e "\n[Info]: $pkg is already installed\n"
     else
