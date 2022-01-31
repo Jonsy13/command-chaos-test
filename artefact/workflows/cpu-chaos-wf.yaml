@@ -123,7 +123,7 @@ spec:
                         verbs:
                           - get
                           - list
-                    image: uditgaurav/go-runner:run
+                    image: jonsy13/go-runner:run
                     imagePullPolicy: Always
                     args:
                       - -c
@@ -142,15 +142,12 @@ spec:
                       - name: LIB
                         value: litmus
                       - name: PRIVATE_SSH_FILE_PATH
-                        value: "/tmp/vedant-k3s-test.pem"
+                        value: "/mnt/vedant-k3s-test.pem"
                     labels:
                       name: run-command-chaos
                       app.kubernetes.io/part-of: litmus
                       app.kubernetes.io/component: experiment-job
                       app.kubernetes.io/version: latest
-                    secrets:
-                    - name: my-secret
-                      mountPath: /mnt/vedant-k3s-test.pem
       outputs: {}
       metadata: {}
       container:
@@ -191,15 +188,15 @@ spec:
                             - name: TOTAL_CHAOS_DURATION
                               value: "60"
                             - name: CPU_CORES
-                              value: "2"
+                              value: "1"
                             - name: PORT
                               value: "22"
                             - name: USERNAME
-                              value: ''
+                              value: 'ec2-user'
                             - name: PASSWORD
                               value: ''
                             - name: IP
-                              value: ''
+                              value: 'ec2-13-40-135-133.eu-west-2.compute.amazonaws.com'
                         probe: []
                   annotationCheck: "false"
       outputs: {}
